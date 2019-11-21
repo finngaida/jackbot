@@ -5,7 +5,9 @@ from skimage.transform import resize
 import matplotlib.pyplot as plt
 import sklearn.neighbors as skneigh
 import cv2 as cv
+
 import detectRegion
+import cards_finder
 
 def binarize(img):
     """
@@ -54,7 +56,7 @@ def class_probabilities(image, dict, show_debug=False):
 
         # take diff
         diff = np.abs(img - compare_img)
-        histo, _ = np.histogram(diff, bins=bins)
+        histo, _ = np.histogram(diff, bins=20)
         histo = histo[1:]
         probabilities[label] = sum(histo)
 
@@ -82,7 +84,7 @@ def prediction_tuple(probabilities):
     prediction = [x for x, i in probabilities.items() if i == min(probabilities.values())][0]
     return (prediction, probabilities[prediction])
 
-def classify(image, labels):
+def classify(image, rank_rect, suit_rect, rank_labels, suit_labels):
     """
     Classify an image into one of the supplied classes
     :param image: input image (preferably binarized)
@@ -90,16 +92,26 @@ def classify(image, labels):
     :return: predicted label and dict of all probabilities
     """
 
+    # abort if no region was found
+    if rank_rect[2] == 0 or rank_rect[3] == 0 or suit_rect[2] == 0 or suit_rect[3] == 0:
+        return False
+
+    # 3. crop image to the rank/suit region
+    rank_img = image[rank_rect[1]:rank_rect[1] + rank_rect[3], rank_rect[0]:rank_rect[0] + rank_rect[2]]
+    suit_img = image[suit_rect[1]:suit_rect[1] + suit_rect[3], suit_rect[0]:suit_rect[0] + suit_rect[2]]
+
     # calculate probabilities for each class
-    probabilities = class_probabilities(image, labels)
+    rank_probabilities = class_probabilities(rank_img, rank_labels)
+    suit_probabilities = class_probabilities(suit_img, suit_labels)
 
     # extract prediction
-    pred, prob = prediction_tuple(probabilities)
+    r_pred, _ = prediction_tuple(rank_probabilities)
+    s_pred, _ = prediction_tuple(suit_probabilities)
 
-    return pred, probabilities
+    return (r_pred, rank_probabilities), (s_pred, suit_probabilities)
 
 
-def main(show_debug=False):
+def test(show_debug=False):
     # load the ground truth labels globally once
     ranks, suits = load_dict()
 
@@ -117,17 +129,6 @@ def main(show_debug=False):
 
         # 2. extract region of rank and suit from input
         rank_rect, suit_rect = detectRegion.detectRegion(img)
-
-        # abort if no region was found
-        if rank_rect[2] == 0 or rank_rect[3] == 0 or suit_rect[2] == 0 or suit_rect[3] == 0:
-            print("Couldn't find value region for {}".format(id))
-            rank_history.append(False)
-            suit_history.append(False)
-            continue
-
-        # 3. crop image to the rank/suit region
-        rank_img = img[rank_rect[1]:rank_rect[1]+rank_rect[3], rank_rect[0]:rank_rect[0]+rank_rect[2]]
-        suit_img = img[suit_rect[1]:suit_rect[1] + suit_rect[3], suit_rect[0]:suit_rect[0] + suit_rect[2]]
 
         # 4. predict the label
         rank, r_prob = classify(rank_img, ranks)
@@ -172,6 +173,32 @@ def main(show_debug=False):
     accuracy = (num_rank_successes + num_suit_successes) / (len(rank_history) + len(suit_history))
     print("accuracy: {}".format(accuracy))
 
+
+def main():
+    # load the ground truth labels globally once
+    ranks, suits = load_dict()
+
+    # load test image
+    img = skio.imread('test/asdf.jpg')
+    img = cards_finder.resize_image(img)
+
+    # find cards
+    cards = cards_finder.select_cards(img)
+
+    for card in cards:
+        img = binarize(card)
+        cards_finder.shi(img)
+
+        # detect value region
+        rank_rect, suit_rect = detectRegion.detectRegion(img)
+
+        # classify
+        result = classify(img, rank_rect, suit_rect, ranks, suits)
+
+        if result == False:
+            print("Error")
+        else:
+            print(result[0][0], result[1][0])
 
 if __name__ == '__main__':
     main()

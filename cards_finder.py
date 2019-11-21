@@ -89,7 +89,7 @@ def four_point_transform(image, pts):
 
 
 def read_image(path):
-    return cv2.imread("img/card/several_noover_angle.png")
+    return cv2.imread(path)
 
 
 def resize_image(img, scale=0.2):
@@ -140,12 +140,12 @@ def select_cards(img):
     
 
 def main():
-    parser = argparse.ArgumentParser(description='Classify playing cards.')
-    parser.add_argument('path', metavar='path', type=str, nargs=1,
-                        help='A path to an image')
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description='Classify playing cards.')
+    # parser.add_argument('path', metavar='path', type=str, nargs=1,
+    #                     help='A path to an image')
+    # args = parser.parse_args()
     
-    img = read_image(args.path)
+    img = read_image("test/asdf.jpg")
     img_resized = resize_image(img)
     # TODO
     cards = select_cards(img_resized)
