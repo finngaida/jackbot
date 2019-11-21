@@ -152,12 +152,14 @@ def detectRegion(img):
     # cv.rectangle(img, (x_rank, y_rank), (x_rank+w_rank, y_rank+h_rank), (0, 0, 255), 2)
     # cv.rectangle(img, (x_suit, y_suit), (x_suit + w_suit, y_suit + h_suit), (0, 255, 0), 2)
     # cv.imwrite('value_regionvalue_region_3.png', img)
-   
+
     
+
+
     # return the cordinates of the value region 
     return [x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]
 
-
+"""
 def main():
     # img should be a cropped and morphed card
     # img = skio.imread('f.jpg')
@@ -170,4 +172,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
+"""

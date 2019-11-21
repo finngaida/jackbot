@@ -14,10 +14,13 @@ from utils import *
 import cv2
 
 
+DEBUG = True
+
+
 def shi(_img):
     plt.imshow(cv2.cvtColor(_img, cv2.COLOR_BGR2RGB))
     plt.show()
-
+    
 
 def order_points(pts):
     # initialzie a list of coordinates that will be ordered
@@ -89,7 +92,7 @@ def four_point_transform(image, pts):
 
 
 def read_image(path):
-    return cv2.imread("img/card/several_noover_angle.png")
+    return cv2.imread(path)
 
 
 def resize_image(img, scale=0.2):
@@ -97,9 +100,9 @@ def resize_image(img, scale=0.2):
     return cv2.resize(img, new_size)
 
 
-def select_sat(img):
+def select_val(img):
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    return img_hsv[:,:,1]
+    return img_hsv[:,:,2]
 
 
 def fill_holes(img):
@@ -107,47 +110,81 @@ def fill_holes(img):
     img_seed[1:-1, 1:-1] = 255
     img_mask = img
     img_filled = morpho.reconstruction(img_seed, img_mask, method='erosion')
+    
     return img_filled.astype(np.uint8)
 
 
 def crop_transform(img_orig, img_bin):
-    # img_selected = np.zeros_like(img_bin, dtype=np.uint8)
     cards = []
     
     contours, _ = cv2.findContours(img_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    for cnt in contours:
-        if cv2.contourArea(cnt) > 10000:
-            err = 0.05 * cv2.arcLength(cnt, True)
-            approx = cv2.approxPolyDP(cnt, err, True)
+    
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
+    areas = [cv2.contourArea(cnt) for cnt in contours]
+    cards_cnts = []
+    # we assume that at least one card is present
+    prev_area = areas[0]
+    
+    for cnt, area in zip(contours, areas):
+        ratio = float(area) / prev_area
+        if ratio > 0.5:
+            cards_cnts.append(cnt)
+            prev_area = area
+        else:
+            break
+        
+    for cnt in cards_cnts:        
+        err = 0.1 * cv2.arcLength(cnt, True)
+        approx = cv2.approxPolyDP(cnt, err, True)
+        
+        several_cards = False
+        
+        if (len(approx) == 4):
+            approx = approx.reshape((4, 2))
             
-            if (len(approx) == 4):
-                found_card = four_point_transform(img_orig, approx.reshape((4, 2)))
-                cards.append(found_card)
-                
-            if (len(approx) > 4):
-                # TODO
-                pass
+            img_cnt = np.zeros_like(img_bin, dtype=np.uint8)
+            cv2.drawContours(img_cnt, [cnt], -1, 255, cv2.FILLED)
+            img_approx = np.zeros_like(img_bin, dtype=np.uint8)
+            cv2.fillConvexPoly(img_approx, approx, 255)
+            img_diff = np.bitwise_xor(img_approx, img_cnt)
+            img_ref = np.bitwise_or(img_approx, img_cnt)
+            if np.count_nonzero(img_diff) / np.count_nonzero(img_ref) > 0.1:
+                several_cards = True
+            else:
+                found_card = four_point_transform(img_orig, approx)
+                ratio = found_card.shape[0] / found_card.shape[1]
+                if not np.isclose(ratio, 3.5 / 2.5, rtol=0.3):
+                    several_cards = True
+                else:
+                    cards.append(found_card)
+            
+        if (len(approx) > 4 or several_cards):
+            pass
+            
     return cards
 
 
 def select_cards(img):
-    img_saturation = select_sat(img)
-    img_thr = np.zeros_like(img_saturation, dtype=np.uint8)
-    img_thr[img_saturation < 16] = 128
-    img_filled = fill_holes(img_thr)
-    found_cards = crop_transform(img, img_filled)
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    img_filled = fill_holes(img_gray)
+    img_blur = cv2.GaussianBlur(img_filled, (7, 7), 0)
+    img_open = cv2.morphologyEx(img_blur, cv2.MORPH_OPEN, strel('diamond', 3))
+    _, img_thr = cv2.threshold(img_open, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+    
+    found_cards = crop_transform(img, img_thr)      
     return found_cards
     
 
 def main():
-    parser = argparse.ArgumentParser(description='Classify playing cards.')
-    parser.add_argument('path', metavar='path', type=str, nargs=1,
-                        help='A path to an image')
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description='Classify playing cards.')
+    # parser.add_argument('path', metavar='path', type=str, nargs=1,
+    #                     help='A path to an image')
+    # args = parser.parse_args()
     
-    img = read_image(args.path)
+    # img = read_image(args.path)
+    img = read_image("test/1.png")
     img_resized = resize_image(img)
-    # TODO
     cards = select_cards(img_resized)
     for card in cards:
         shi(card)
@@ -155,7 +192,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-# img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# img_blur = cv2.GaussianBlur(img_gray, (5,5), sigmaX=1.5, sigmaY=1.5)
-# img_canny = cv2.Canny(img_blur, 100, 200)
