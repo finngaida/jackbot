@@ -17,15 +17,24 @@ from scipy import ndimage as ndi
 
 
 def detectRegion(img):
+
+    """
     height, width, ch = img.shape
     print(height, width)
     img_hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
     proimg = img_hsv[:,:,1]
     proimg = cv.GaussianBlur(proimg,(3,3),0)
     ret, binary = cv.threshold(proimg, 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)
+    """
+
+    height, width = img.shape
+    # proimg = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+    # proimg = cv.GaussianBlur(proimg,(3,3),0)
+    # ret, binary = cv.threshold(proimg.astype(np.uint8), 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)
+
     # plt.imshow(binary,cmap="gray")
     # plt.show()
-    canny = cv.Canny(binary, 50, 150)
+    canny = cv.Canny(img, 50, 150)
     # plt.imshow(canny,cmap="gray")
     # plt.show()
     
@@ -83,20 +92,28 @@ def detectRegion(img):
     cv.imshow("contour_suit", contour_suit)
     
     # draw the contour of value region in another pic
+    """"
     cv.rectangle(img, (x_region, y_region), (x_region+w_region, y_region+h_region), (0, 0, 255), 2)
     cv.imshow("value region", img)
     # cv.imwrite('value_regionvalue_region_3.png', img)
-    # return the cordinates of the value region 
+
+    # cv.rectangle(img, (x_rank, y_rank), (x_rank+w_rank, y_rank+h_rank), (0, 0, 255), 2)
+    # cv.rectangle(img, (x_suit, y_suit), (x_suit + w_suit, y_suit + h_suit), (0, 255, 0), 2)
+    # cv.imwrite('value_regionvalue_region_3.png', img)
+    """
     
-    return [[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]]
+    # return the cordinates of the value region 
+    return [x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]
 
 
 def main():
     # img should be a cropped and morphed card
     # img = skio.imread('f.jpg')
-    img = skio.imread('detectRegion_test.png')
-    [[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]] = detectRegion(img)
-    print ([[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]])
+    # img = skio.imread('detectRegion_test.png')
+    
+    img = skio.imread('test/asdf.jpg')
+    a, b = detectRegion(img)
+    print (a, b)
 
 
 if __name__ == '__main__':
