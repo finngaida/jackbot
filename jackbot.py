@@ -7,9 +7,12 @@ import sklearn.neighbors as skneigh
 import cv2 as cv
 import detectRegion
 
-rank_to_suit_ratio = 0.56
-
 def binarize(img):
+    """
+    convert image to grayscale and then threshold it to become a binary map
+    :param img: input image prefrably from skio
+    :return: thresholded binary image
+    """
     image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     image = cv.GaussianBlur(image, (3, 3), 0)
     ret, image = cv.threshold(image, 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)
@@ -18,32 +21,29 @@ def binarize(img):
 def load_dict(ranks_to_load = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'valet', 'dame', 'roi'],
               suits_to_load = ['hearts', 'diamonds', 'clubs', 'spades']):
     """
-
-    :param ranks_to_load:
-    :param suits_to_load:
-    :return:
+    generate the "ground truth" labelled datasets to compare against
+    :param ranks_to_load: default: all
+    :param suits_to_load: default: all
+    :return: ranks, suits dictionaries with labels as keys and images as values
     """
 
     ranks = {}
     suits = {}
     for rank in ranks_to_load:
         img = binarize(skio.imread('groundtruth/ranks/{}.jpg'.format(rank)))
-        # histo, _ = np.histogram(img, bins=2)
-        ranks[rank] = img#, histo)
+        ranks[rank] = img
     for suit in suits_to_load:
         img = binarize(skio.imread('groundtruth/suits/{}.jpg'.format(suit)))
-        # histo, _ = np.histogram(img, bins=2)
-        suits[suit] = img#, histo)
+        suits[suit] = img
     return ranks, suits
 
-def class_probabilities(image, dict, bins=2, show_debug=False):
+def class_probabilities(image, dict, show_debug=False):
     """
-
-    :param image:
-    :param dict:
-    :param bins:
-    :param show_debug:
-    :return:
+    calculate the probabilities of the input image belonging to any of the specified classes in dict
+    :param image: input image (preferably binarized)
+    :param dict: class labels to check against (load with load_dict)
+    :param show_debug: set to true to render images and diffs
+    :return: dict with labels as keys and corresponding probabilities as values
     """
     probabilities = {}
     for label, compare_img in dict.items():
@@ -75,19 +75,19 @@ def class_probabilities(image, dict, bins=2, show_debug=False):
 
 def prediction_tuple(probabilities):
     """
-
-    :param probabilities:
-    :return:
+    Extract the most probable prediction from the dict of all predictions
+    :param probabilities: all predictions
+    :return: most probable label and accompanying confidence
     """
     prediction = [x for x, i in probabilities.items() if i == min(probabilities.values())][0]
     return (prediction, probabilities[prediction])
 
 def classify(image, labels):
     """
-
-    :param image:
-    :param labels:
-    :return:
+    Classify an image into one of the supplied classes
+    :param image: input image (preferably binarized)
+    :param labels: labels dict (load with load_dict)
+    :return: predicted label and dict of all probabilities
     """
 
     # calculate probabilities for each class
@@ -98,40 +98,16 @@ def classify(image, labels):
 
     return pred, probabilities
 
-def test_accuracy():
-    rank_history = []
-    suit_history = []
-    ranks, suits = load_dict()
-    for card in range(1, 9):
-            img_ = skio.imread('test/{}.jpg'.format(card))
-            img = skio.imread('test/{}.jpg'.format(card), as_gray=True)
-            rank_pred, suit_pred = classify(img, ranks, suits)
-            rank_success = rank_pred[0] == card[0]
-            rank_history.append(rank_success)
-            suit_success = suit_pred[0] == card[1]
-            suit_history.append(suit_success)
-
-            print("{} {} {}, {} {} {} {}".format(
-                rank_pred,
-                "==" if rank_success else "!=",
-                card[0],
-                suit_pred,
-                "==" if suit_success else "!=",
-                card[1],
-                "✅" if rank_success and suit_success else "🔴"))
-
-    num_rank_successes = len([x for x in rank_history if x == True])
-    num_rank_errors = len([x for x in rank_history if x == False])
-    num_suit_successes = len([x for x in suit_history if x == True])
-    num_suit_errors = len([x for x in suit_history if x == False])
-    accuracy = (num_rank_successes + num_suit_successes) / (len(rank_history) + len(suit_history))
-    print("accuracy: {}".format(accuracy))
 
 def main(show_debug=False):
+    # load the ground truth labels globally once
     ranks, suits = load_dict()
+
+    # these will store a series of bools indicating an (in)correct classification for later accuracy evaluation
     rank_history = []
     suit_history = []
 
+    # test labels for the test images
     rank_labels = ['2', '9', '6', '7', '5', '5', 'dame', '4', '2', '8', '9', '10', 'roi', '1', '2', 'valet', 'dame', '3', '4', '9', '10', 'valet', 'roi', '1']
     suit_labels = ['diamonds', 'diamonds', 'clubs', 'clubs', 'hearts', 'clubs', 'diamonds', 'clubs', 'clubs', 'hearts', 'hearts', 'hearts', 'hearts', 'clubs', 'clubs', 'hearts', 'hearts', 'clubs', 'clubs', 'spades', 'spades', 'spades', 'spades', 'diamonds']
 
@@ -142,19 +118,22 @@ def main(show_debug=False):
         # 2. extract region of rank and suit from input
         rank_rect, suit_rect = detectRegion.detectRegion(img)
 
+        # abort if no region was found
         if rank_rect[2] == 0 or rank_rect[3] == 0 or suit_rect[2] == 0 or suit_rect[3] == 0:
             print("Couldn't find value region for {}".format(id))
             rank_history.append(False)
             suit_history.append(False)
             continue
 
-        # 3. classify
+        # 3. crop image to the rank/suit region
         rank_img = img[rank_rect[1]:rank_rect[1]+rank_rect[3], rank_rect[0]:rank_rect[0]+rank_rect[2]]
         suit_img = img[suit_rect[1]:suit_rect[1] + suit_rect[3], suit_rect[0]:suit_rect[0] + suit_rect[2]]
 
+        # 4. predict the label
         rank, r_prob = classify(rank_img, ranks)
         suit, s_prob = classify(suit_img, suits)
 
+        # evaluation logic
         rank_success = rank == rank_labels[id]
         rank_history.append(rank_success)
         suit_success = suit == suit_labels[id]
@@ -185,6 +164,7 @@ def main(show_debug=False):
             plt.xticks(buckets, s_prob.keys())
             plt.show()
 
+    # calculate accuracy
     num_rank_successes = len([x for x in rank_history if x == True])
     num_rank_errors = len([x for x in rank_history if x == False])
     num_suit_successes = len([x for x in suit_history if x == True])

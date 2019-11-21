@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81f9afb3-526c-4a48-9341-efa53f4cc77d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/detectRegion.py" beforeDir="false" afterPath="$PROJECT_DIR$/detectRegion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jackbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/jackbot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1c2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1c3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1c4.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1d2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1d3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1h2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1h3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1s2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1s3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/5s2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/5s3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/5s4.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rc2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rc3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rd2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rd3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rh2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rh3.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rs2.jpeg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,12 +19,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jackbot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-713">
-              <caret line="134" column="24" selection-start-line="134" selection-start-column="24" selection-end-line="134" selection-end-column="24" />
+            <state relative-caret-position="462">
+              <caret line="168" selection-start-line="168" selection-end-line="168" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cards_finder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1809" />
           </provider>
         </entry>
       </file>
@@ -92,11 +78,6 @@
             <path>
               <item name="jackbot" type="b2602c69:ProjectViewProjectNode" />
               <item name="jackbot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jackbot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jackbot" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -191,23 +172,23 @@
       <option name="presentableId" value="Default" />
       <updated>1574263163467</updated>
       <workItem from="1574263165222" duration="3416000" />
-      <workItem from="1574333479844" duration="8147000" />
+      <workItem from="1574333479844" duration="8694000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11563000" />
+    <option name="totallyTimeSpent" value="12110000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2536349" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2536349" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -265,10 +246,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cards_finder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1809" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jackbot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-713">
-          <caret line="134" column="24" selection-start-line="134" selection-start-column="24" selection-end-line="134" selection-end-column="24" />
+        <state relative-caret-position="462">
+          <caret line="168" selection-start-line="168" selection-end-line="168" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
