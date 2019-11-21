@@ -75,7 +75,7 @@ def detectRegion(img):
     cv.imwrite('value_regionvalue_region_3.png', img)
     # return the cordinates of the value region 
     
-    return [x_region, y_region, w_region, h_region]
+    return [[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]]
 
 
 def main():
