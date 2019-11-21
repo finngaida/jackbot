@@ -1,8 +1,8 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Tue Nov 19 21:02:18 2019
-
 @author: claireqian
 """
 import cv2 as cv
@@ -18,7 +18,9 @@ from scipy import ndimage as ndi
 
 def detectRegion(img):
     height, width, ch = img.shape
-    proimg = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+    print(height, width)
+    img_hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+    proimg = img_hsv[:,:,1]
     proimg = cv.GaussianBlur(proimg,(3,3),0)
     ret, binary = cv.threshold(proimg, 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)
     # plt.imshow(binary,cmap="gray")
@@ -38,7 +40,8 @@ def detectRegion(img):
     w_rank = w_suit = h_rank = h_suit = 0
     for index in range(0, len(contours)):
         x, y, w, h = cv.boundingRect(contours[index])
-        if (up_rank>y and x<width/2 and y>height*0.025 and width/10>w>width/20 and height/10>h>height/20): 
+        if (up_rank>y and x<width/2 and y>height*0.025 and width/10>w>width/20 and height/10>h>height/20 
+            and cv.contourArea(contours[index])>height*width/500): 
             up_rank = y
             left_rank = x
             i_rank = index
@@ -49,14 +52,23 @@ def detectRegion(img):
     for index in range(0, len(contours)):
         if (index==i_rank): continue
         x, y, w, h = cv.boundingRect(contours[index])
-        if (left_suit>x and y<height/2 and x>0.02*width and width/10>w>width/20 and height/10>h>height/20): 
+        if (left_suit>x and y<height/2 and x>0.02*width and width/5>w>width/15 and height/10>h>height/30): 
             up_suit = y
             left_suit = x
             i_suit = index
             x_suit = x
             y_suit = y
             h_suit = h
-            w_suit = w
+            
+    
+    # if rank==10
+    if (max(abs(x_rank-x_suit), abs(x_rank+w_rank-x_suit-w_suit))>0.005*width):
+            if (x_rank<x_suit):
+                w_rank = w_rank * 3
+            else:
+                x_rank = int(x_rank - w_rank*3/4)
+                w_rank = int(w_rank * 7 / 4)
+
     
     # codinates of value region 
     x_region = min(x_rank, x_suit)
@@ -65,14 +77,15 @@ def detectRegion(img):
     h_region = max(y_rank+h_rank, y_suit+h_suit) - y_region
     
     # draw the contour of rank and suit
-    # contour_rank = cv.drawContours(img.copy(),contours,i_rank,(0,255,255),3)
-    # cv.imshow("contour_rank", contour_rank)
-    # contour_suit = cv.drawContours(img.copy(),contours,i_suit,(0,255,255),3)
-    # cv.imshow("contour_suit", contour_suit)
+    contour_rank = cv.drawContours(img.copy(),contours,i_rank,(0,255,255),3)
+    cv.imshow("contour_rank", contour_rank)
+    contour_suit = cv.drawContours(img.copy(),contours,i_suit,(0,255,255),3)
+    cv.imshow("contour_suit", contour_suit)
     
     # draw the contour of value region in another pic
     cv.rectangle(img, (x_region, y_region), (x_region+w_region, y_region+h_region), (0, 0, 255), 2)
-    cv.imwrite('value_regionvalue_region_3.png', img)
+    cv.imshow("value region", img)
+    # cv.imwrite('value_regionvalue_region_3.png', img)
     # return the cordinates of the value region 
     
     return [[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]]
@@ -80,9 +93,10 @@ def detectRegion(img):
 
 def main():
     # img should be a cropped and morphed card
-    img = skio.imread('detectRegion_test_3.png')
-    [x, y, w, h] = detectRegion(img)
-    print (x, y, w, h)
+    # img = skio.imread('f.jpg')
+    img = skio.imread('detectRegion_test.png')
+    [[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]] = detectRegion(img)
+    print ([[x_rank, y_rank, w_rank, h_rank], [x_suit, y_suit, w_suit, h_suit]])
 
 
 if __name__ == '__main__':
