@@ -179,7 +179,7 @@ def main():
     ranks, suits = load_dict()
 
     # load test image
-    img = skio.imread('test/asdf.jpg')
+    img = skio.imread('test/1.png')
     img = cards_finder.resize_image(img)
 
     # find cards
