@@ -54,7 +54,7 @@ def detectRegion(img):
     proimg[proimg > 255] = 255
     proimg = np.round(proimg)
     proimg = proimg.astype(np.uint8)
-
+    cv.imwrite("contrast.jpg", proimg)
     # proimg = contrast_img(proimg, 1.5, 1)
     """
     img_hsv = cv.cvtColor(proimg, cv.COLOR_BGR2HSV)
@@ -83,7 +83,7 @@ def detectRegion(img):
     # plt.imshow(binary,cmap="gray")
     # plt.show()
     canny = cv.Canny(proimg, 50, 150)
-    # cv.imshow("canny", canny)
+    cv.imwrite("canny.jpg", canny)
     
     contours, hierarchy = cv.findContours(canny, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     
@@ -141,9 +141,11 @@ def detectRegion(img):
     h_region = max(y_rank+h_rank, y_suit+h_suit) - y_region
     
     # draw the contour of rank and suit
-    # contour_rank = cv.drawContours(img.copy(),contours,i_rank,(0,255,255),3)
+    contour_rank = cv.drawContours(img.copy(),contours,i_rank,(0,255,255),3)
+    cv.imwrite("contour_rank.jpg", contour_rank)
     # cv.imshow("contour_rank", contour_rank)
-    # contour_suit = cv.drawContours(img.copy(),contours,i_suit,(0,255,255),3)
+    contour_suit = cv.drawContours(img.copy(),contours,i_suit,(0,255,255),3)
+    cv.imwrite("contour_suit.jpg", contour_suit)
     # cv.imshow("contour_suit", contour_suit)
     
     # draw the contour of value region in another pic
@@ -159,7 +161,7 @@ def detectRegion(img):
 
     # return the cordinates of the value region 
     
-    return [x_region,  y_region, w_region, y_suit - y_region], [ x_region, y_suit, w_region, h_suit]
+    return [x_region,  y_region, w_region, h_rank], [ x_region, y_suit, w_region, h_suit]
 
 """
 def main():
@@ -167,7 +169,7 @@ def main():
     # img = skio.imread('f.jpg')
     # img = skio.imread('detectRegion_test.png')
     
-    img = cv.imread('./test/1.jpg')
+    img = cv.imread('./test/0.jpg')
     a, b = detectRegion(img)
     print (a, b)
 
