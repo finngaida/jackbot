@@ -98,8 +98,9 @@ def classify(image, rank_rect, suit_rect, rank_labels, suit_labels, show_debug=F
         return "Insufficient regions: {}, {}".format(rank_rect, suit_rect)
 
     # 3. crop image to the rank/suit region
-    rank_img = image[rank_rect[1]:rank_rect[1] + rank_rect[3], rank_rect[0]:rank_rect[0] + rank_rect[2]]
-    suit_img = image[suit_rect[1]:suit_rect[1] + suit_rect[3], suit_rect[0]:suit_rect[0] + suit_rect[2]]
+    img = binarize2(image)
+    rank_img = img[rank_rect[1]:rank_rect[1] + rank_rect[3], rank_rect[0]:rank_rect[0] + rank_rect[2]]
+    suit_img = img[suit_rect[1]:suit_rect[1] + suit_rect[3], suit_rect[0]:suit_rect[0] + suit_rect[2]]
 
     # calculate probabilities for each class
     rank_probabilities = class_probabilities(rank_img, rank_labels)

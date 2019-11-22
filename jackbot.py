@@ -6,7 +6,6 @@ import cards_finder
 import detectRegion
 import classifier
 
-
 def test(show_debug=False):
     # load the ground truth labels globally once
     ranks, suits = classifier.load_dict()
@@ -56,41 +55,45 @@ def test(show_debug=False):
     print("accuracy: {}".format(accuracy))
 
 
+
+
+
+
+
+
+
+
+
 def main():
     # load the ground truth labels globally once
     ranks, suits = classifier.load_dict()
 
-    for i in range(1, 2):
-        # load test image
-        # img = cv.imread('test/{}.png'.format(i))
-        img = cv.imread('test/wasd.jpg')
-        # img = cards_finder.resize_image(img, scale=0.5)
+    # load test image
+    img = cv.imread('test/wasd.jpg')
+    plt.title('Input image')
+    plt.imshow(cv.cvtColor(img, cv.COLOR_BGR2RGB))
+    plt.show()
 
-        # find cards
-        cards = cards_finder.select_cards(img)
+    # find cards
+    cards = cards_finder.select_cards(img)
 
-        for card in cards:
-            img = classifier.binarize2(card)
-            # cards_finder.shi(img)
+    for card in cards:
+        # detect value region
+        rank_rect, suit_rect = detectRegion.detectRegion(card)
 
-            # detect value region
-            rank_rect, suit_rect = detectRegion.detectRegion(card)
+        # classify
+        result = classifier.classify(card, rank_rect, suit_rect, ranks, suits)
 
-            # classify
+        if type(result) is str:
+            print(result)
+            plt.title(result)
+        else:
+            rank = result[0][0]
+            suit = result[1][0]
+            plt.title('{} of {}'.format(rank, suit))
 
-            result = classifier.classify(img, rank_rect, suit_rect, ranks, suits)
-
-            if type(result) is str:
-                print(result)
-                plt.title(result)
-            else:
-                rank = result[0][0]
-                suit = result[1][0]
-                plt.title('{} of {}'.format(rank, suit))
-
-            plt.imshow(cv.cvtColor(card, cv.COLOR_BGR2RGB))
-            plt.show()
+        plt.imshow(cv.cvtColor(card, cv.COLOR_BGR2RGB))
+        plt.show()
 
 if __name__ == '__main__':
     main()
-    # test()
