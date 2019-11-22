@@ -116,9 +116,9 @@ def test(show_debug=False):
     ranks, suits = load_dict()
 
     # these will store a series of bools indicating an (in)correct classification for later accuracy evaluation
-    rank_history = []
+    rsssank_history = []
     suit_history = []
-
+    
     # test labels for the test images
     rank_labels = ['2', '9', '6', '7', '5', '5', 'dame', '4', '2', '8', '9', '10', 'roi', '1', '2', 'valet', 'dame', '3', '4', '9', '10', 'valet', 'roi', '1']
     suit_labels = ['diamonds', 'diamonds', 'clubs', 'clubs', 'hearts', 'clubs', 'diamonds', 'clubs', 'clubs', 'hearts', 'hearts', 'hearts', 'hearts', 'clubs', 'clubs', 'hearts', 'hearts', 'clubs', 'clubs', 'spades', 'spades', 'spades', 'spades', 'diamonds']
@@ -179,20 +179,23 @@ def main():
     ranks, suits = load_dict()
 
     # load test image
-    img = skio.imread('test/1.png')
-    img = cards_finder.resize_image(img)
+    img = cv.imread('test/2.png')
+    # img = cards_finder.resize_image(img)
 
     # find cards
     cards = cards_finder.select_cards(img)
+    i = 0
 
     for card in cards:
-        img = binarize(card)
+        # img = binarize(card)
         cards_finder.shi(img)
-
+        cv.imshow("card{}".format(i), card)
+        i = i+1
         # detect value region
-        rank_rect, suit_rect = detectRegion.detectRegion(img)
+        rank_rect, suit_rect = detectRegion.detectRegion(card)
 
         # classify
+        img = binarize(card)
         result = classify(img, rank_rect, suit_rect, ranks, suits)
 
         if result == False:
