@@ -83,7 +83,7 @@ def detectRegion(img):
     # plt.imshow(binary,cmap="gray")
     # plt.show()
     canny = cv.Canny(proimg, 50, 150)
-    cv.imwrite("canny.jpg", canny)
+    # cv.imwrite("canny.jpg", canny)
     
     contours, hierarchy = cv.findContours(canny, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     
@@ -142,10 +142,10 @@ def detectRegion(img):
     
     # draw the contour of rank and suit
     contour_rank = cv.drawContours(img.copy(),contours,i_rank,(0,255,255),3)
-    cv.imwrite("contour_rank.jpg", contour_rank)
+    # cv.imwrite("contour_rank.jpg", contour_rank)
     # cv.imshow("contour_rank", contour_rank)
     contour_suit = cv.drawContours(img.copy(),contours,i_suit,(0,255,255),3)
-    cv.imwrite("contour_suit.jpg", contour_suit)
+    # cv.imwrite("contour_suit.jpg", contour_suit)
     # cv.imshow("contour_suit", contour_suit)
     
     # draw the contour of value region in another pic
@@ -154,10 +154,10 @@ def detectRegion(img):
     # cv.imshow("value region", img)
     # cv.imwrite('value_regionvalue_region_3.png', img)
 
-    cv.rectangle(img, (x_region, y_region), (x_region+w_region, y_suit), (0, 0, 255), 2)
-    cv.rectangle(img, (x_region, y_suit), (x_region + w_region, y_suit + h_suit), (0, 0, 255), 2)
+    # cv.rectangle(img, (x_region, y_region), (x_region+w_region, y_suit), (0, 0, 255), 2)
+    # cv.rectangle(img, (x_region, y_suit), (x_region + w_region, y_suit + h_suit), (0, 0, 255), 2)
     # cv.imwrite('value_region_1.png', img)
-    cv.imshow("value region", img)
+    # cv.imshow("value region", img)
 
     # return the cordinates of the value region 
     

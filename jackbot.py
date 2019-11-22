@@ -20,6 +20,12 @@ def binarize(img):
     ret, image = cv.threshold(image, 0, 255, cv.THRESH_BINARY_INV | cv.THRESH_OTSU)
     return image
 
+def binarize2(img):
+    image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    image = cv.GaussianBlur(image, (3, 3), 0)
+    ret, image = cv.threshold(image, 200, 255, cv.THRESH_BINARY_INV)
+    return image
+
 def load_dict(ranks_to_load = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'valet', 'dame', 'roi'],
               suits_to_load = ['hearts', 'diamonds', 'clubs', 'spades']):
     """
@@ -84,7 +90,7 @@ def prediction_tuple(probabilities):
     prediction = [x for x, i in probabilities.items() if i == min(probabilities.values())][0]
     return (prediction, probabilities[prediction])
 
-def classify(image, rank_rect, suit_rect, rank_labels, suit_labels):
+def classify(image, rank_rect, suit_rect, rank_labels, suit_labels, show_debug=False):
     """
     Classify an image into one of the supplied classes
     :param image: input image (preferably binarized)
@@ -94,7 +100,7 @@ def classify(image, rank_rect, suit_rect, rank_labels, suit_labels):
 
     # abort if no region was found
     if rank_rect[2] == 0 or rank_rect[3] == 0 or suit_rect[2] == 0 or suit_rect[3] == 0:
-        return False
+        return "Insufficient regions: {}, {}".format(rank_rect, suit_rect)
 
     # 3. crop image to the rank/suit region
     rank_img = image[rank_rect[1]:rank_rect[1] + rank_rect[3], rank_rect[0]:rank_rect[0] + rank_rect[2]]
@@ -108,6 +114,22 @@ def classify(image, rank_rect, suit_rect, rank_labels, suit_labels):
     r_pred, _ = prediction_tuple(rank_probabilities)
     s_pred, _ = prediction_tuple(suit_probabilities)
 
+    if show_debug:
+        plt.subplot(221)
+        plt.imshow(rank_img, cmap='gray')
+        plt.subplot(222)
+        buckets = np.arange(len(rank_probabilities))
+        plt.bar(buckets, rank_probabilities.values())
+        plt.xticks(buckets, rank_probabilities.keys())
+        plt.subplot(223)
+        plt.imshow(suit_img, cmap='gray')
+        plt.title("{} of {}".format(r_pred, s_pred))
+        plt.subplot(224)
+        buckets = np.arange(len(suit_probabilities))
+        plt.bar(buckets, suit_probabilities.values())
+        plt.xticks(buckets, suit_probabilities.keys())
+        plt.show()
+
     return (r_pred, rank_probabilities), (s_pred, suit_probabilities)
 
 
@@ -116,7 +138,7 @@ def test(show_debug=False):
     ranks, suits = load_dict()
 
     # these will store a series of bools indicating an (in)correct classification for later accuracy evaluation
-    rsssank_history = []
+    rank_history = []
     suit_history = []
     
     # test labels for the test images
@@ -125,14 +147,16 @@ def test(show_debug=False):
 
     for id in range(24):
         # 1. simulate card localization/morphing (tbd)
-        img = binarize(skio.imread('test/{}.jpg'.format(id)))
+        img = cv.imread('test/{}.jpg'.format(id))
+        binimg = binarize2(img)
 
         # 2. extract region of rank and suit from input
         rank_rect, suit_rect = detectRegion.detectRegion(img)
 
         # 4. predict the label
-        rank, r_prob = classify(rank_img, ranks)
-        suit, s_prob = classify(suit_img, suits)
+        r_result, s_result = classify(binimg, rank_rect, suit_rect, ranks, suits, show_debug)
+        rank = r_result[0]
+        suit = s_result[0]
 
         # evaluation logic
         rank_success = rank == rank_labels[id]
@@ -149,22 +173,6 @@ def test(show_debug=False):
             suit_labels[id],
             "✅" if rank_success and suit_success else "🔴"))
 
-        if show_debug:
-            plt.subplot(221)
-            plt.imshow(rank_img, cmap='gray')
-            plt.subplot(222)
-            buckets = np.arange(len(r_prob))
-            plt.bar(buckets, r_prob.values())
-            plt.xticks(buckets, r_prob.keys())
-            plt.subplot(223)
-            plt.imshow(suit_img, cmap='gray')
-            plt.title("{} of {}".format(rank, suit))
-            plt.subplot(224)
-            buckets = np.arange(len(s_prob))
-            plt.bar(buckets, s_prob.values())
-            plt.xticks(buckets, s_prob.keys())
-            plt.show()
-
     # calculate accuracy
     num_rank_successes = len([x for x in rank_history if x == True])
     num_rank_errors = len([x for x in rank_history if x == False])
@@ -178,30 +186,37 @@ def main():
     # load the ground truth labels globally once
     ranks, suits = load_dict()
 
-    # load test image
-    img = cv.imread('test/2.png')
-    # img = cards_finder.resize_image(img)
+    for i in range(1, 2):
+        # load test image
+        # img = cv.imread('test/{}.png'.format(i))
+        img = cv.imread('test/wasd.jpg')
+        # img = cards_finder.resize_image(img, scale=0.5)
 
-    # find cards
-    cards = cards_finder.select_cards(img)
-    i = 0
+        # find cards
+        cards = cards_finder.select_cards(img)
 
-    for card in cards:
-        # img = binarize(card)
-        cards_finder.shi(img)
-        cv.imshow("card{}".format(i), card)
-        i = i+1
-        # detect value region
-        rank_rect, suit_rect = detectRegion.detectRegion(card)
+        for card in cards:
+            img = binarize2(card)
+            # cards_finder.shi(img)
 
-        # classify
-        img = binarize(card)
-        result = classify(img, rank_rect, suit_rect, ranks, suits)
+            # detect value region
+            rank_rect, suit_rect = detectRegion.detectRegion(card)
 
-        if result == False:
-            print("Error")
-        else:
-            print(result[0][0], result[1][0])
+            # classify
+
+            result = classify(img, rank_rect, suit_rect, ranks, suits)
+
+            if type(result) is str:
+                print(result)
+                plt.title(result)
+            else:
+                rank = result[0][0]
+                suit = result[1][0]
+                plt.title('{} of {}'.format(rank, suit))
+
+            plt.imshow(cv.cvtColor(card, cv.COLOR_BGR2RGB))
+            plt.show()
 
 if __name__ == '__main__':
     main()
+    # test()
