@@ -35,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jackbot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+            <state relative-caret-position="394">
+              <caret line="102" column="31" lean-forward="true" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
               <folding>
                 <element signature="e#112#133#0" expanded="true" />
               </folding>
@@ -229,12 +229,12 @@
       <workItem from="1574333479844" duration="11419000" />
       <workItem from="1574409861378" duration="6990000" />
       <workItem from="1574418820437" duration="4539000" />
-      <workItem from="1574520340043" duration="2614000" />
+      <workItem from="1574520340043" duration="2921000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28978000" />
+    <option name="totallyTimeSpent" value="29285000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -259,7 +259,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.37318256" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.55573505" />
       <window_info anchor="right" id="Database" order="4" weight="0.32956383" />
       <window_info anchor="right" x="0" y="0" width="270" height="600" id="Documentation" order="5" side_tool="true" weight="0.32956383" />
     </layout>
@@ -396,10 +396,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="1083" selection-start-line="1083" selection-end-line="1083" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/jackbot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+        <state relative-caret-position="394">
+          <caret line="102" column="31" lean-forward="true" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
           <folding>
             <element signature="e#112#133#0" expanded="true" />
           </folding>
