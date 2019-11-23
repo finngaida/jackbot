@@ -25,11 +25,11 @@ If run on the test image in `images/test/wasd.jpg`:
 
 The algorithm produces the following results:
 
-![](presentation assets/testresult.png)
+![](presentation_assets/testresult.png)
 
 ## Architecture
 
-![](presentation assets/arch.png)
+![](presentation_assets/arch.png)
 
 More information about the internals of the project can be found in the [final presentation](https://drive.google.com/file/d/1qFl73Nb20_aACLSF3KZzjzMU6I5kwhEc/view?usp=sharing).
 
