@@ -17,6 +17,16 @@ Make sure you have `matplotlib`, `openCV`, `numpy` and `skimage`installed, then 
 python src/jackbot.py -p /path/to/input/image
 ```
 
+## Results
+
+If run on the test image in `images/test/wasd.jpg`:
+
+![](images/test/wasd.jpg)
+
+The algorithm produces the following results:
+
+![](presentation assets/testresult.png)
+
 ## Architecture
 
 ![](presentation assets/arch.png)

@@ -85,12 +85,15 @@ def main():
     cards = cards_detector.detect_cards(img)
     print("Found {} cards:".format(len(cards)))
 
-    for card in cards:
+    for cardi in range(len(cards)):
+        card = cards[cardi] # b 🙈
+
         # detect value region
         rank_rect, suit_rect = region_detector.detect_region(card)
 
         # classify
         result = classifier.classify(card, rank_rect, suit_rect, ranks, suits)
+        plt.subplot(2, len(cards)//2+1, cardi+1)
 
         if type(result) is str:
             print(result)
@@ -103,7 +106,8 @@ def main():
             print(card_title)
 
         plt.imshow(cv.cvtColor(card, cv.COLOR_BGR2RGB))
-        plt.show()
+
+    plt.show()
 
 if __name__ == '__main__':
     main()
