@@ -2,8 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81f9afb3-526c-4a48-9341-efa53f4cc77d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jackbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/jackbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards_finder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrast.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/detectRegion.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/dame.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/roi.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/ranks/valet.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/suits/clubs.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/suits/diamonds.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/suits/hearts.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groundtruth/suits/spades.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jackbot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/0.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/10.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/11.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/12.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/13.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/14.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/15.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/16.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/17.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/18.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/19.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/20.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/21.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/22.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/23.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/9.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/asdf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/asdfa.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/wasd.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,8 +67,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/jackbot$jackbot__1_.coverage" NAME="jackbot Coverage Results" MODIFIED="1574522583352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/jackbot$detectRegion.coverage" NAME="detectRegion Coverage Results" MODIFIED="1574411271467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/jackbot$jackbot.coverage" NAME="jackbot Coverage Results" MODIFIED="1574422703168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/jackbot$jackbot.coverage" NAME="jackbot Coverage Results" MODIFIED="1574520358637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/jackbot$cards_finder.coverage" NAME="cards_finder Coverage Results" MODIFIED="1574415935983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -32,49 +88,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/jackbot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+              <folding>
+                <element signature="e#112#133#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/jackbot.py">
+        <entry file="file://$PROJECT_DIR$/src/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
-              <folding>
-                <element signature="e#1#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="13" column="41" lean-forward="true" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classifier.py">
+        <entry file="file://$PROJECT_DIR$/src/region_detector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="120" column="32" lean-forward="true" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cards_finder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3043">
-              <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="184" selection-end-column="33" />
-              <folding>
-                <element signature="e#110#128#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/detectRegion.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1092">
-              <caret line="83" column="16" lean-forward="true" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+            <state relative-caret-position="-249">
+              <caret line="43" column="15" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
               <folding>
                 <element signature="e#112#128#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cards_detector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/classifier.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#112#142#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,10 +163,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cards_finder.py" />
         <option value="$PROJECT_DIR$/detectRegion.py" />
         <option value="$PROJECT_DIR$/classifier.py" />
+        <option value="$PROJECT_DIR$/cards_finder.py" />
         <option value="$PROJECT_DIR$/jackbot.py" />
+        <option value="$PROJECT_DIR$/src/classifier.py" />
+        <option value="$PROJECT_DIR$/src/cards_finder.py" />
+        <option value="$PROJECT_DIR$/src/jackbot.py" />
+        <option value="$PROJECT_DIR$/src/region_detector.py" />
+        <option value="$PROJECT_DIR$/src/cards_detector.py" />
+        <option value="$PROJECT_DIR$/src/utils.py" />
       </list>
     </option>
   </component>
@@ -117,6 +185,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,11 +193,15 @@
               <item name="jackbot" type="b2602c69:ProjectViewProjectNode" />
               <item name="jackbot" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="jackbot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jackbot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -155,51 +228,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.jackbot">
-    <configuration name="cards_finder" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="jackbot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cards_finder.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="detectRegion" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="jackbot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/detectRegion.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="jackbot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="jackbot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -222,16 +251,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.cards_finder" />
-      <item itemvalue="Python.detectRegion" />
-      <item itemvalue="Python.jackbot" />
-    </list>
+    <configuration name="jackbot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="jackbot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/jackbot.py" />
+      <option name="PARAMETERS" value="-p &quot;../images/test/wasd.jpg&quot;" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.jackbot" />
-        <item itemvalue="Python.cards_finder" />
-        <item itemvalue="Python.detectRegion" />
+        <item itemvalue="Python.jackbot" />
       </list>
     </recent_temporary>
   </component>
@@ -248,23 +293,24 @@
       <workItem from="1574263165222" duration="3416000" />
       <workItem from="1574333479844" duration="11419000" />
       <workItem from="1574409861378" duration="6990000" />
-      <workItem from="1574418820437" duration="3542000" />
+      <workItem from="1574418820437" duration="4539000" />
+      <workItem from="1574520340043" duration="2123000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25367000" />
+    <option name="totallyTimeSpent" value="28487000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09854604" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1898223" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.19452055" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.29178083" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -278,7 +324,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.28029078" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.37318256" />
       <window_info anchor="right" id="Database" order="4" weight="0.32956383" />
       <window_info anchor="right" x="0" y="0" width="270" height="600" id="Documentation" order="5" side_tool="true" weight="0.32956383" />
     </layout>
@@ -340,9 +386,7 @@
     <entry file="file://$PROJECT_DIR$/test/1.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/IMG_9957.JPG">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test/IMG_9957.JPG" />
     <entry file="file://$PROJECT_DIR$/detectRegion.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1092">
@@ -355,31 +399,75 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cards_finder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3043">
-          <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="184" selection-end-column="33" />
+        <state relative-caret-position="534">
+          <caret line="193" column="10" lean-forward="true" selection-start-line="193" selection-start-column="10" selection-end-line="193" selection-end-column="10" />
           <folding>
             <element signature="e#110#128#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/jackbot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="120" column="32" lean-forward="true" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+        <state relative-caret-position="156">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jackbot.py">
+    <entry file="file://$PROJECT_DIR$/images/groundtruth/ranks/1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
-            <element signature="e#1#32#0" expanded="true" />
+            <element signature="e#112#142#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/region_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-249">
+          <caret line="43" column="15" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
+          <folding>
+            <element signature="e#112#128#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cards_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jackbot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="e#112#133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="41" lean-forward="true" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
         </state>
       </provider>
     </entry>

@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 20 09:03:08 2019
+
+@author: finngaida
+"""
+
 from skimage import io as skio
 import numpy as np
 from skimage.transform import resize
@@ -33,10 +41,10 @@ def load_dict(ranks_to_load = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
     ranks = {}
     suits = {}
     for rank in ranks_to_load:
-        img = binarize(skio.imread('groundtruth/ranks/{}.jpg'.format(rank)))
+        img = binarize(skio.imread('../images/groundtruth/ranks/{}.jpg'.format(rank)))
         ranks[rank] = img
     for suit in suits_to_load:
-        img = binarize(skio.imread('groundtruth/suits/{}.jpg'.format(suit)))
+        img = binarize(skio.imread('../images/groundtruth/suits/{}.jpg'.format(suit)))
         suits[suit] = img
     return ranks, suits
 

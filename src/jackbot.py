@@ -1,9 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 20 09:03:08 2019
+
+@author: finngaida
+"""
+
+import os
 import matplotlib.pyplot as plt
 import cv2 as cv
 import argparse
 
-import cards_finder
-import detectRegion
+import cards_detector
+import region_detector
 import classifier
 
 def test(show_debug=False):
@@ -20,16 +29,15 @@ def test(show_debug=False):
 
     for id in range(24):
         # 1. simulate card localization/morphing (tbd)
-        img = cv.imread('test/{}.jpg'.format(id))
-        binimg = classifier.binarize2(img)
+        img = cv.imread('../images/test/{}.jpg'.format(id))
 
         # 2. extract region of rank and suit from input
-        rank_rect, suit_rect = detectRegion.detectRegion(img)
+        rank_rect, suit_rect = region_detector.detect_region(img)
 
         # 4. predict the label
-        r_result, s_result = classifier.classify(binimg, rank_rect, suit_rect, ranks, suits, show_debug)
-        rank = r_result[0]
-        suit = s_result[0]
+        result = classifier.classify(img, rank_rect, suit_rect, ranks, suits, show_debug)
+        rank = result[0][0]
+        suit = result[1][0]
 
         # evaluation logic
         rank_success = rank == rank_labels[id]
@@ -55,31 +63,31 @@ def test(show_debug=False):
     print("accuracy: {}".format(accuracy))
 
 
-
-
-
-
-
-
-
-
-
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--input-path", help="Path to the cards scene image", required=True)
+    args = parser.parse_args()
+
+    if not os.path.isfile(args.input_path):
+        exit(-1)
+
     # load the ground truth labels globally once
     ranks, suits = classifier.load_dict()
 
     # load test image
-    img = cv.imread('test/wasd.jpg')
+    img = cv.imread(args.input_path)
     plt.title('Input image')
     plt.imshow(cv.cvtColor(img, cv.COLOR_BGR2RGB))
     plt.show()
 
     # find cards
-    cards = cards_finder.select_cards(img)
+    print("Detecting cards in input image...")
+    cards = cards_detector.detect_cards(img)
+    print("Found {} cards:".format(len(cards)))
 
     for card in cards:
         # detect value region
-        rank_rect, suit_rect = detectRegion.detectRegion(card)
+        rank_rect, suit_rect = region_detector.detect_region(card)
 
         # classify
         result = classifier.classify(card, rank_rect, suit_rect, ranks, suits)
@@ -90,10 +98,13 @@ def main():
         else:
             rank = result[0][0]
             suit = result[1][0]
-            plt.title('{} of {}'.format(rank, suit))
+            card_title = '{} of {}'.format(rank, suit)
+            plt.title(card_title)
+            print(card_title)
 
         plt.imshow(cv.cvtColor(card, cv.COLOR_BGR2RGB))
         plt.show()
 
 if __name__ == '__main__':
     main()
+    # test()

@@ -7,15 +7,11 @@ Created on Wed Nov 20 09:03:08 2019
 """
 
 import numpy as np
-import argparse
 import skimage.morphology as morpho
 import matplotlib.pyplot as plt
-from utils import *
 import cv2
 
-
-DEBUG = True
-
+import utils
 
 def shi(_img):
     plt.imshow(cv2.cvtColor(_img, cv2.COLOR_BGR2RGB))
@@ -116,7 +112,8 @@ def fill_holes(img):
 
 def crop_transform(img_orig, img_bin):
     cards = []
-    
+
+    # detect the card shapes
     contours, _ = cv2.findContours(img_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     
     contours = sorted(contours, key=cv2.contourArea, reverse=True)
@@ -124,7 +121,8 @@ def crop_transform(img_orig, img_bin):
     cards_cnts = []
     # we assume that at least one card is present
     prev_area = areas[0]
-    
+
+    # filter only for actual single cards (no overlapping or incomplete ones)
     for cnt, area in zip(contours, areas):
         ratio = float(area) / prev_area
         if ratio > 0.5:
@@ -164,31 +162,23 @@ def crop_transform(img_orig, img_bin):
     return cards
 
 
-def select_cards(img):
+def detect_cards(img):
+    """
+    Localize and extract all playing cards in the input image using OpenCV contour detection.
+    After preprocessing and filtering all found cards will be morphed to be in a cropped, vertical, top-down position.
+    :param img: Input image of a scene
+    :return: Array of card images
+    """
+
+    # convert to grayscale
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    
+
+    # preprocess image
     img_filled = fill_holes(img_gray)
     img_blur = cv2.GaussianBlur(img_filled, (7, 7), 0)
-    img_open = cv2.morphologyEx(img_blur, cv2.MORPH_OPEN, strel('diamond', 3))
+    img_open = cv2.morphologyEx(img_blur, cv2.MORPH_OPEN, utils.strel('diamond', 3))
     _, img_thr = cv2.threshold(img_open, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
-    
+
+    # extract images
     found_cards = crop_transform(img, img_thr)      
     return found_cards
-    
-
-def main():
-    # parser = argparse.ArgumentParser(description='Classify playing cards.')
-    # parser.add_argument('path', metavar='path', type=str, nargs=1,
-    #                     help='A path to an image')
-    # args = parser.parse_args()
-    
-    # img = read_image(args.path)
-    img = read_image("test/1.png")
-    img_resized = resize_image(img)
-    cards = select_cards(img_resized)
-    for card in cards:
-        shi(card)
-
-
-if __name__ == '__main__':
-    main()
