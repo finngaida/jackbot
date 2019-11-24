@@ -35,7 +35,7 @@ More information about the internals of the project can be found in the [final p
 
 # Authors
 
-- [Rounan](https://github.com/Claire1997)
+- [Rounan Qian](https://github.com/Claire1997)
 - [Andrey Babushkin](https://github.com/mannannlegur)
 - [Finn Gaida](https://github.com/finngaida)
 
